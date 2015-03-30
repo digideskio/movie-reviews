@@ -1,4 +1,4 @@
-<%= form_for(@movie) do |f| %>
+<%= simple_form_for @movie, html: { multipart: true } do |f| %>
   <% if @movie.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
@@ -12,24 +12,29 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.input :title %>
+  </div>
+
+  <div class="field">
+    <!-- <%= f.input :image %> -->
+    <%= image_tag(@movie.image_url(:thumb)) if @movie.image? %>
+    <% unless @movie.image? %>
+      <%= f.input :image %>
+    <% end %>
+      <%= f.hidden_field :image_cache, as: :image %>
+  </div>
+
+  <div class="field">
+    <%= f.input :description %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.input :movie_length %>
   </div>
   <div class="field">
-    <%= f.label :movie_length %><br>
-    <%= f.text_field :movie_length %>
+    <%= f.input :director %>
   </div>
   <div class="field">
-    <%= f.label :director %><br>
-    <%= f.text_field :director %>
-  </div>
-  <div class="field">
-    <%= f.label :rating %><br>
-    <%= f.text_field :rating %>
+    <%= f.input :rating %>
   </div>
   <div class="actions">
     <%= f.submit %>
