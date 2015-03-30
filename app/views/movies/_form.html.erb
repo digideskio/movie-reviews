@@ -18,10 +18,8 @@
   <div class="field">
     <!-- <%= f.input :image %> -->
     <%= image_tag(@movie.image_url(:thumb)) if @movie.image? %>
-    <% unless @movie.image? %>
-      <%= f.input :image %>
-    <% end %>
-      <%= f.hidden_field :image_cache, as: :image %>
+    <%= f.input :image, required: false %>
+    <%= f.hidden_field :image_cache, as: :image %>
   </div>
 
   <div class="field">
