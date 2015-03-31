@@ -8,6 +8,14 @@ class MoviesController < ApplicationController
     @movies = Movie.all
   end
 
+  def search
+    if params[:search].present?
+      @movies = Movie.search(params[:search])
+    else
+      @movies = Movie.all
+    end
+  end
+
   # GET /movies/1
   # GET /movies/1.json
   def show
